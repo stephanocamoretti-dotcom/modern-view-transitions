@@ -1,60 +1,50 @@
-# ⚡ Modern View Transitions API en React
+<p align="right">
+  <a href="./README.es.md">🇪🇸 Leer en Español</a>
+</p>
 
-Bienvenido a **Modern View Transitions**, un proyecto de demostración que implementa la [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) nativa de los navegadores modernos junto con **React** y **Vite**.
+<p align="center">
+  <img src="./assets/banner.svg" alt="Modern View Transitions Banner" width="100%" />
+</p>
 
-Este repositorio está diseñado como un **aporte de valor** para desarrolladores y arquitectos web que buscan crear experiencias fluidas tipo app nativa (iOS/Android) **sin necesidad de librerías pesadas** como Framer Motion o React Spring.
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/React-Vite-38BDF8?style=for-the-badge&logo=react&logoColor=white" alt="React" />
+  <img src="https://img.shields.io/badge/Web_API-View_Transitions-34D399?style=for-the-badge" alt="View Transitions API" />
+  <img src="https://img.shields.io/badge/License-MIT-818CF8?style=for-the-badge" alt="MIT License" />
+</p>
 
-## 🚀 ¿Por qué esto es el Futuro del Desarrollo Web?
+# Modern View Transitions
 
-Históricamente, animar transiciones de página complejas en Single Page Applications (SPAs) requería:
-1. Montar componentes fantasma.
-2. Interceptar el enrutamiento.
-3. Usar JS pesado para calcular dimensiones iniciales y finales (FLIP animations).
+A lightweight, practical showcase of the **native Browser View Transitions API** (`document.startViewTransition`) in **React + TypeScript + Vite**—delivering smooth shared-element morphs and route/state transitions at 60fps without heavy animation libraries.
 
-La **View Transitions API** delega todo este trabajo al motor de renderizado del navegador (C++). Con solo unas cuantas líneas de código, el navegador captura un "snapshot" de la pantalla anterior, otro de la nueva pantalla, y anima la transición entre ellas utilizando **exclusivamente CSS**.
+---
 
-### Beneficios Clave:
-- **0kb extra de JavaScript** para el motor de animación.
-- **Rendimiento nativo**, liberando el hilo principal (Main Thread).
-- **SEO y Growth Friendly**: Experiencia de usuario inmersiva (mayor retención) sin sacrificar Core Web Vitals (TBT/LCP).
-- **Mantenibilidad**: Se controla todo vía CSS `::view-transition-*` pseudo-elementos.
+## How It Works
 
-## 🛠️ Stack Tecnológico
+```mermaid
+flowchart LR
+    State["UI State Change"] --> Check{"startViewTransition supported?"}
+    Check -->|Yes| SnapOld["Capture Old DOM Snapshot"]
+    SnapOld --> Mutate["flushSync / Update React DOM"]
+    Mutate --> SnapNew["Capture New DOM Snapshot"]
+    SnapNew --> Morph["GPU Pseudo-Element Morph (::view-transition-group)"]
+    Check -->|No| Fallback["Instant DOM Update Fallback"]
+```
 
-- **Framework:** React 19 + Vite 6
-- **Routing:** React Router v7
-- **Styling:** TailwindCSS v4
-- **Animation Engine:** Native Browser View Transitions API
+---
 
-## 📋 Estructura del Código
+## Quick Start
 
-Este repositorio demuestra:
-1. Navegación fluida entre un catálogo (Galería) y el detalle del ítem.
-2. `view-transition-name` dinámicos para que las imágenes "vuelen" a su nueva posición.
-3. Hook custom `useViewTransition` para encapsular la llamada `document.startViewTransition`.
-
-## 📦 Instalación y Uso
-
-1. **Clonar repositorio:**
 ```bash
-git clone https://github.com/tu-usuario/modern-view-transitions.git
+git clone https://github.com/stephanocamoretti-dotcom/modern-view-transitions.git
 cd modern-view-transitions
-```
-
-2. **Instalar dependencias:**
-```bash
 npm install
-```
-
-3. **Levantar entorno local:**
-```bash
 npm run dev
 ```
 
-## 👨‍💻 Acerca del Autor
+---
 
-Desarrollado y mantenido por **Stephano Rojas Camoretti**.
-*AI Solutions Architect & Growth Engineer*
-Construyo sistemas y arquitecturas de crecimiento que combinan alto rendimiento técnico con impacto comercial real.
+## References
 
-[LinkedIn](https://www.linkedin.com/in/stephanocamoretti/) | [GitHub](https://github.com/stephanocamoretti-dotcom) | [Portafolio](https://stephano-portfolio.vercel.app/)
+- [MDN Web Docs — View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API)
+- [Chrome for Developers — Smooth Transitions with the View Transitions API](https://developer.chrome.com/docs/web-platform/view-transitions)
